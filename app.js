@@ -15,7 +15,8 @@ let stats = {
 
 let clickUpgrades = {
   pickaxe: {
-    price: 100,
+    // TODO change price back to 100
+    price: 10,
     multiplier: 1
   },
   drill: {
@@ -25,7 +26,7 @@ let clickUpgrades = {
 }
 let idleUpgrades = {
   miner: {
-    price: 500,
+    price: 10,
     multiplier: 5
   },
   spaceShip: {
@@ -34,13 +35,50 @@ let idleUpgrades = {
   }
 }
 
+function interval() {
+  let seconds = 3
+  let inter = setInterval(idle, 1000 * seconds)
+}
+function idle() {
+  inventory.cheese += stats.cheesePerSecond
+  drawinventory()
+}
+function buyMiner() {
+  if (inventory.cheese >= idleUpgrades.miner.price) {
+    inventory.cheese -= idleUpgrades.miner.price
+    stats.cheesePerSecond += idleUpgrades.miner.multiplier
+    idleUpgrades.miner.price += Math.floor((idleUpgrades.miner.price *= 0.3))
+    inventory.miner++
+    drawinventory()
+    drawstats()
+    drawClickUpgrades()
+    drawIdleUpgrades()
+  } else {
+    alert("you need more cheddar")
+  }
 
+}
 
-
-
+// when pressed i want it to check if there is enough cheese to buy it
+// if there is I want to deduct the cheese by price, add the modifier and increase price
+function buyPickaxe() {
+  if (inventory.cheese >= clickUpgrades.pickaxe.price) {
+    inventory.cheese -= clickUpgrades.pickaxe.price
+    stats.cheesePerClick += clickUpgrades.pickaxe.multiplier
+    clickUpgrades.pickaxe.price += Math.floor((clickUpgrades.pickaxe.price *= 0.2))
+    inventory.pickaxe++
+    drawinventory()
+    drawstats()
+    drawClickUpgrades()
+    drawIdleUpgrades()
+  } else {
+    alert("you need more cheddar")
+  }
+}
+// TODO need buy functions for drill miner and spaceship
 function mine() {
   stats.clicks++
-  inventory.cheese++
+  inventory.cheese += stats.cheesePerClick
   drawstats()
   drawinventory()
 
@@ -55,7 +93,7 @@ function drawinventory() {
   <h5>Pickaxe's: ${inventory.pickaxe}</h5>
   <h5>Drill's: ${inventory.drill}</h5>
   <h5>Miner's: ${inventory.miner}</h5>
-  <h5>Miner's: ${inventory.spaceShip}</h5>
+  <h5>Spaceship's: ${inventory.spaceShip}</h5>
   `
   document.getElementById("inventory").innerHTML = template
 }
@@ -99,7 +137,9 @@ function drawIdleUpgrades() {
   document.getElementById("idle-upgrade").innerHTML = template
 }
 
+
 drawinventory()
 drawstats()
 drawClickUpgrades()
 drawIdleUpgrades()
+interval()
