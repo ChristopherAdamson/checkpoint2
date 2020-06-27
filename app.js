@@ -10,28 +10,32 @@ let inventory = {
 let stats = {
   clicks: 0,
   cheesePerClick: 1,
-  cheesePerSecond: 0
+  cheesePerSecond: 0,
 }
 
 let clickUpgrades = {
   pickaxe: {
     // TODO change price back to 100
     price: 10,
-    multiplier: 1
+    multiplier: 1,
+    title: "Pickaxe",
   },
   drill: {
     price: 5000,
     multiplier: 75,
+    title: "Drill",
   }
 }
 let idleUpgrades = {
   miner: {
     price: 10,
-    multiplier: 5
+    multiplier: 5,
+    title: "Miner",
   },
   spaceShip: {
     price: 1200,
     multiplier: 20,
+    title: "SpaceShip"
   }
 }
 
@@ -41,7 +45,7 @@ function interval() {
 }
 function idle() {
   inventory.cheese += stats.cheesePerSecond
-  drawinventory()
+  drawInventory()
 }
 function buyMiner() {
   if (inventory.cheese >= idleUpgrades.miner.price) {
@@ -49,16 +53,44 @@ function buyMiner() {
     stats.cheesePerSecond += idleUpgrades.miner.multiplier
     idleUpgrades.miner.price += Math.floor((idleUpgrades.miner.price *= 0.3))
     inventory.miner++
-    drawinventory()
-    drawstats()
+    drawInventory()
+    drawStats()
     drawClickUpgrades()
     drawIdleUpgrades()
   } else {
     alert("you need more cheddar")
   }
-
 }
 
+function buySpaceShip() {
+  if (inventory.cheese >= idleUpgrades.spaceShip.price) {
+    inventory.cheese -= idleUpgrades.spaceShip.price
+    stats.cheesePerSecond += idleUpgrades.spaceShip.multiplier
+    idleUpgrades.spaceShip.price += Math.floor((idleUpgrades.spaceShip.price *= 0.5))
+    inventory.spaceShip++
+    drawInventory()
+    drawStats()
+    drawClickUpgrades()
+    drawIdleUpgrades()
+  } else {
+    alert("you need more cheddar")
+  }
+}
+
+function buyDrill() {
+  if (inventory.cheese >= clickUpgrades.drill.price) {
+    inventory.cheese -= clickUpgrades.drill.price
+    stats.cheesePerClick += clickUpgrades.drill.multiplier
+    clickUpgrades.drill.price += Math.floor((clickUpgrades.drill.price *= 0.4))
+    inventory.drill++
+    drawInventory()
+    drawStats()
+    drawClickUpgrades()
+    drawIdleUpgrades()
+  } else {
+    alert("you need more cheddar")
+  }
+}
 // when pressed i want it to check if there is enough cheese to buy it
 // if there is I want to deduct the cheese by price, add the modifier and increase price
 function buyPickaxe() {
@@ -67,8 +99,8 @@ function buyPickaxe() {
     stats.cheesePerClick += clickUpgrades.pickaxe.multiplier
     clickUpgrades.pickaxe.price += Math.floor((clickUpgrades.pickaxe.price *= 0.2))
     inventory.pickaxe++
-    drawinventory()
-    drawstats()
+    drawInventory()
+    drawStats()
     drawClickUpgrades()
     drawIdleUpgrades()
   } else {
@@ -79,13 +111,13 @@ function buyPickaxe() {
 function mine() {
   stats.clicks++
   inventory.cheese += stats.cheesePerClick
-  drawstats()
-  drawinventory()
+  drawStats()
+  drawInventory()
 
 }
 // each time mine is called draw inventory should update with cheese count
 // each time an upgrade is purchased increment that in inventory
-function drawinventory() {
+function drawInventory() {
   let template = ""
   template += `
   <h1>Inventory</h1>
@@ -100,7 +132,7 @@ function drawinventory() {
 
 
 // each time an upgrade is purchased update the counter
-function drawstats() {
+function drawStats() {
   let template = ""
   template += `
     <h1>Stats</h1>
@@ -117,7 +149,7 @@ function drawClickUpgrades() {
     let upgrade = clickUpgrades[prop]
     template += `
   <div class="col-1 bg-white">
-    <button class=""><i class="fa fa-spoon"></i></button> - ${upgrade.price}
+    <button onclick="buy${upgrade.title}()" class="big-font"><i class="fa fa-spoon"></i></button> - ${upgrade.price}
       </div>
   `
   }
@@ -130,7 +162,7 @@ function drawIdleUpgrades() {
     let upgrade = idleUpgrades[prop]
     template += `
   <div class="col-1 bg-white  ">
-        <button class=""><i class="fa fa-spoon"></i></button> -  ${upgrade.price}
+        <button onclick="buy${upgrade.title}()" class="big-font"><i class="fa fa-spoon"></i></button> -  ${upgrade.price}
       </div>
   `
   }
@@ -138,8 +170,9 @@ function drawIdleUpgrades() {
 }
 
 
-drawinventory()
-drawstats()
+
+drawInventory()
+drawStats()
 drawClickUpgrades()
 drawIdleUpgrades()
 interval()
