@@ -8,13 +8,15 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
     integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
   <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Notable&display=swap" rel="stylesheet">
+
 
 
   <link rel="stylesheet" href="style.css">
   <title>Moon Miner</title>
 </head>
 
-<body class="bg-img">
+<body class="bg-img note">
 
   <header class="text-center text-light">
     <h1>Moon Miner</h1>
@@ -22,7 +24,7 @@
 
   <main class="container-fluid ">
     <div class="row  justify-content-center">
-      <div id="stats" class="col-4 card">
+      <div id="stats" class="offset-1 col-3 white-opa text-white rounded">
         <!-- <h1>Stats</h1>
         <h5>X's Clicked: 0</h5>
         <h5>Cheese per Click: 0</h5>
@@ -31,7 +33,7 @@
       <div id="moon" class="col-4 text-light text-center justify-content-center">
         <img onclick="mine()" class="" src="https://media.giphy.com/media/aN9GqoR7OD3nq/giphy.gif" alt="">
       </div>
-      <div id="inventory" class="col-4  card">
+      <div id="inventory" class=" col-3 mr-auto p-3 white-opa text-light rounded ">
         <!-- <h1>Inventory</h1>
         <h2>Cheese: 0 </h2>
         <h5>Pickaxe's: 0</h5>
@@ -40,14 +42,20 @@
       </div>
 
     </div>
-    <h1 class="text-center text-light ">Upgrades</h1>
-    <div id="click-upgrades" class="row justify-content-center text-center">
-      <!-- <div class="offset-4 col-4 bg-white rounded ">
-        <p><button class="btn"><i class="fa fa-spoon"></i></button>Cost = 50</p>
-      </div> -->
-    </div>
-    <div id="idle-upgrade" class="row justify-content-center text-center"></div>
+    <div class=" container ">
+      <div class="row justify-content-center text-center rounded">
+        <div class="col-5 white-opa text-light rounded">
 
+          <h1 class="text-center text-light "><u>Upgrades</u></h1>
+          <div id="click-upgrades" class="row p-3 justify-content-center text-center ">
+            <!-- <div class="offset-4 col-4 bg-white rounded ">
+              <p><button class="btn"><i class="fa fa-spoon"></i></button>Cost = 50</p>
+            </div> -->
+          </div>
+          <div id="idle-upgrade" class="row p-3 justify-content-center text-center "></div>
+        </div>
+      </div>
+    </div>
     <!-- <div class="row justify-content-center text-center">
       <div class="col-8 bg-white rounded ">
         <p><button onclick="buyPickaxe()" class="btn"><i class="fa fa-spoon"></i></button>Cost = 50</p>

@@ -120,7 +120,7 @@ function mine() {
 function drawInventory() {
   let template = ""
   template += `
-  <h1>Inventory</h1>
+  <h1><u>Inventory</u></h1>
   <h2>Cheese: ${inventory.cheese} </h2>
   <h5>Pickaxe's: ${inventory.pickaxe}</h5>
   <h5>Drill's: ${inventory.drill}</h5>
@@ -135,7 +135,7 @@ function drawInventory() {
 function drawStats() {
   let template = ""
   template += `
-    <h1>Stats</h1>
+    <h1><u>Stats</u></h1>
     <h5>X's Clicked: ${stats.clicks} </h5>
     <h5>Cheese per Click: ${stats.cheesePerClick}</h5>
     <h5>Idle Cheese per Second: ${stats.cheesePerSecond}</h5>
@@ -148,8 +148,8 @@ function drawClickUpgrades() {
   for (let prop in clickUpgrades) {
     let upgrade = clickUpgrades[prop]
     template += `
-  <div class="col-1 bg-white">
-    <button onclick="buy${upgrade.title}()" class="big-font"><i class="fa fa-spoon"></i></button> - ${upgrade.price}
+  <div class="col-6">
+    <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font  "><i class="fa fa-spoon"></i></button> - ${upgrade.price}
       </div>
   `
   }
@@ -161,8 +161,8 @@ function drawIdleUpgrades() {
   for (let prop in idleUpgrades) {
     let upgrade = idleUpgrades[prop]
     template += `
-  <div class="col-1 bg-white  ">
-        <button onclick="buy${upgrade.title}()" class="big-font"><i class="fa fa-spoon"></i></button> -  ${upgrade.price}
+  <div class="col-6  ">
+        <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font"><i class="fa fa-spoon"></i></button> -  ${upgrade.price}
       </div>
   `
   }
