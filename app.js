@@ -46,6 +46,9 @@ function interval() {
 function idle() {
   inventory.cheese += stats.cheesePerSecond
   drawInventory()
+  drawClickUpgrades()
+  drawIdleUpgrades()
+  drawStats()
 }
 function buyMiner() {
   if (inventory.cheese >= idleUpgrades.miner.price) {
@@ -113,7 +116,8 @@ function mine() {
   inventory.cheese += stats.cheesePerClick
   drawStats()
   drawInventory()
-
+  drawClickUpgrades()
+  drawIdleUpgrades()
 }
 // each time mine is called draw inventory should update with cheese count
 // each time an upgrade is purchased increment that in inventory
@@ -138,7 +142,7 @@ function drawStats() {
     <h1><u>Stats</u></h1>
     <h5>X's Clicked: ${stats.clicks} </h5>
     <h5>Cheese per Click: ${stats.cheesePerClick}</h5>
-    <h5>Idle Cheese per Second: ${stats.cheesePerSecond}</h5>
+    <h5>Cheese per 3 seconds: ${stats.cheesePerSecond}</h5>
   `
   document.getElementById("stats").innerHTML = template
 }
@@ -147,11 +151,19 @@ function drawClickUpgrades() {
   let template = ""
   for (let prop in clickUpgrades) {
     let upgrade = clickUpgrades[prop]
-    template += `
+    if (upgrade.price > inventory.cheese) {
+      template += `
+      <div class="col-6  ">
+            <button type= "button" title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font" disabled ><img class="img" src="${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
+          </div>
+      `
+    } else {
+      template += `
   <div class="col-6">
-    <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font  "><i class="fa fa-spoon"></i></button> - ${upgrade.price}
+    <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font  "><img class="img" src="${upgrade.title}.png" alt=""></img></button> - ${upgrade.price}
       </div>
   `
+    }
   }
   document.getElementById("click-upgrades").innerHTML = template
 }
@@ -160,11 +172,19 @@ function drawIdleUpgrades() {
   let template = ""
   for (let prop in idleUpgrades) {
     let upgrade = idleUpgrades[prop]
-    template += `
-  <div class="col-6  ">
-        <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font"><i class="fa fa-spoon"></i></button> -  ${upgrade.price}
-      </div>
-  `
+    if (upgrade.price > inventory.cheese) {
+      template += `
+      <div class="col-6  ">
+            <button type= "button" title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font" disabled ><img class="img" src="${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
+          </div>
+      `
+    } else {
+      template += `
+    <div class="col-6  ">
+          <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font"><img class="img" src="${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
+        </div>
+    `
+    }
   }
   document.getElementById("idle-upgrade").innerHTML = template
 }
