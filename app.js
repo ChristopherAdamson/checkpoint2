@@ -16,24 +16,24 @@ let stats = {
 let clickUpgrades = {
   pickaxe: {
     // TODO change price back to 100
-    price: 10,
+    price: 50,
     multiplier: 1,
     title: "Pickaxe",
   },
   drill: {
-    price: 5000,
+    price: 7500,
     multiplier: 75,
     title: "Drill",
   }
 }
 let idleUpgrades = {
   miner: {
-    price: 10,
+    price: 250,
     multiplier: 5,
     title: "Miner",
   },
   spaceShip: {
-    price: 1200,
+    price: 5000,
     multiplier: 20,
     title: "SpaceShip"
   }

@@ -6,7 +6,7 @@ height: 100vh;
 }
 
 .big-font{
-font-size: 200%
+font-size: 250%
 }
 
 .white-opa{
@@ -20,4 +20,10 @@ font-size: 200%
 .img{
   width: 3rem;
   height: 3rem;
+}
+.bigger-font{
+  font-size : 400%;
+}
+.m-height{
+  min-height: 75px;
 }
