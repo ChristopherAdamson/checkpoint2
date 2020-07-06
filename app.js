@@ -154,13 +154,13 @@ function drawClickUpgrades() {
     if (upgrade.price > inventory.cheese) {
       template += `
       <div class="col-6  ">
-            <button type= "button" title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font" disabled ><img class="img" src="${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
+            <button type= "button" title="Buy a ${upgrade.title} for ${upgrade.price} cheese. Gain ${upgrade.multiplier} cheese per click" onclick="buy${upgrade.title}()" class="big-font" disabled ><img class="img" src="assets/${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
           </div>
       `
     } else {
       template += `
   <div class="col-6">
-    <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font  "><img class="img" src="${upgrade.title}.png" alt=""></img></button> - ${upgrade.price}
+    <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese. Gain ${upgrade.multiplier} cheese per click" onclick="buy${upgrade.title}()" class="big-font  "><img class="img" src="assets/${upgrade.title}.png" alt=""></img></button> - ${upgrade.price}
       </div>
   `
     }
@@ -175,13 +175,13 @@ function drawIdleUpgrades() {
     if (upgrade.price > inventory.cheese) {
       template += `
       <div class="col-6  ">
-            <button type= "button" title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font" disabled ><img class="img" src="${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
+            <button type= "button" title="Buy a ${upgrade.title} for ${upgrade.price} cheese.  Gain ${upgrade.multiplier} cheese per 3 seconds " onclick="buy${upgrade.title}()" class="big-font" disabled ><img class="img" src="assets/${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
           </div>
       `
     } else {
       template += `
     <div class="col-6  ">
-          <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese." onclick="buy${upgrade.title}()" class="big-font"><img class="img" src="${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
+          <button title="Buy a ${upgrade.title} for ${upgrade.price} cheese. Gain ${upgrade.multiplier} cheese per 3 seconds" onclick="buy${upgrade.title}()" class="big-font"><img class="img" src="assets/${upgrade.title}.png" alt=""></img></button> -  ${upgrade.price}
         </div>
     `
     }
